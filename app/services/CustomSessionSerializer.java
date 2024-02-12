@@ -6,10 +6,10 @@ import play.api.mvc.Session;
 
 import java.util.Map;
 
-public class CustomEncryptor {
-    private static final Logger logger = LoggerFactory.getLogger(CustomEncryptor.class);
+public class CustomSessionSerializer {
+    private static final Logger logger = LoggerFactory.getLogger(CustomSessionSerializer.class);
 
-    public scala.collection.immutable.Map<String, String> encrypt(Session session){    logger.info("");
+    public scala.collection.immutable.Map<String, String> serialize(Session session){    logger.info("");
         logger.info("");
         logger.info("");
         logger.info("*** CustomEncryptor.encrypt entered ***");
@@ -21,7 +21,7 @@ public class CustomEncryptor {
         return scala.collection.immutable.Map.from(scala.jdk.CollectionConverters.MapHasAsScala(javaMap).asScala());
     }
 
-    public Session decrypt(scala.collection.immutable.Map<String, String> cookie){    logger.info("");
+    public Session deserialize(scala.collection.immutable.Map<String, String> cookie){    logger.info("");
         logger.info("");
         logger.info("");
         logger.info("*** CustomEncryptor.decrypt entered ***");

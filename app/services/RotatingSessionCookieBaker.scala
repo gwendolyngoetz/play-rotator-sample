@@ -6,14 +6,19 @@ import play.api.mvc.{DefaultSessionCookieBaker, Session}
 
 class RotatingSessionCookieBaker @Inject()(
   var configuration: Configuration,
-  var customEncryptor: CustomEncryptor)
+  var customSessionSerializer: CustomSessionSerializer)
 
   extends DefaultSessionCookieBaker {
 
   override def serialize(session: Session):
-
-    Map[String, String] = customEncryptor.encrypt(session)
+    Map[String, String] = customSessionSerializer.serialize(session)
 
   override def deserialize(data: Map[String, String]):
-    Session = customEncryptor.decrypt(data)
+    Session = customSessionSerializer.deserialize(data)
+
+  override def encode(data: Map[String, String]): String =
+    super.encode(data)
+
+  override def decode(encodedData: String): Map[String, String] =
+    super.decode(encodedData)
 }
